@@ -1,0 +1,8 @@
+method,time [ms],numba,double-numba,cython
+for-loop,500,132,,433
+list-comprehension,478,125,30,408
+vectorization,640
+map1,583,200
+map2,545,158
+df.apply,166
+numba.vectorize,7.8
