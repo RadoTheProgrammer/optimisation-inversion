@@ -1,22 +1,24 @@
 import matplotlib.pyplot as plt
 import numpy as np
 
-# Turn on interactive mode
-#plt.ion()
-
-# Create some data
 x = np.linspace(-10, 10, 500)
 y = np.sin(x)
 
-# Plot the data
 fig, ax = plt.subplots()
 ax.plot(x, y)
+plt.title("Zoom or Pan to trigger events")
 
-# Show the plot window with zoom and pan tools enabled
-plt.title("Use mouse wheel to zoom, click-drag to pan")
-plt.xlabel("X-axis")
-plt.ylabel("Y-axis")
-plt.grid(True)
+# Callback functions
+def on_xlim_change(event_ax):
+    print("X-limits changed:", event_ax.get_xlim())
+    
 
-# Keep the plot window open
-plt.show(block=True)
+def on_ylim_change(event_ax):
+    print("Y-limits changed:", event_ax.get_ylim())
+    ax.set_aspect("equal")
+
+# Connect the callbacks to the axes
+ax.callbacks.connect('xlim_changed', on_xlim_change)
+ax.callbacks.connect('ylim_changed', on_ylim_change)
+
+plt.show()
